@@ -1,16 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-/**
- * EJERCICIO 2: Interacción Básica
- * 
- * Objetivo: Entender flujo simple de usuario
- * - Click en elementos
- * - Verificar cambio de URL
- * - Verificar contenido nuevo
- * - Uso de beforeEach
- */
-
-test.describe('Ejercicio 2 - Interacción y Navegación', () => {
+test.describe('Ejercicio 2 - Interacciòn y Navegaciòn', () => {
 
   // Este hook se ejecuta antes de cada test
   test.beforeEach(async ({ page }) => {

@@ -1,15 +1,5 @@
 const { test, expect } = require('@playwright/test');
 
-/**
- * EJERCICIO 1: Validaciones Básicas
- * 
- * Objetivo: Entender la estructura básica de un test E2E
- * - Abrir una página
- * - Validar título
- * - Validar texto presente
- * - Validar visibilidad de elementos
- */
-
 test.describe('Ejercicio 1 - Validaciones Básicas', () => {
 
   test('debe validar el título de la página', async ({ page }) => {
