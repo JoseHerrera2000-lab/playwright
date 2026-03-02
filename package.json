@@ -1,0 +1,19 @@
+{
+  "name": "playwright-e2e-progresivo",
+  "version": "1.0.0",
+  "description": "Curso E2E progresivo con Playwright",
+  "scripts": {
+    "test": "playwright test",
+    "test:ej1": "playwright test ejercicio1",
+    "test:ej2": "playwright test ejercicio2",
+    "test:ej3": "playwright test ejercicio3",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed"
+  },
+  "keywords": ["playwright", "e2e", "testing"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.42.0"
+  }
+}
