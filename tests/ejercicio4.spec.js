@@ -8,27 +8,30 @@ test.describe('ejercicio 4 - interacciones avanzadas con tablas y dropdowns', ()
 
   test('validar y ordenar tabla dinámica', async ({ page }) => {
     await page.getByRole('link', { name: 'Sortable Data Tables' }).click();
-    
+
     // verificamos que la tabla está visible
-    const table = page.locator('#table1');
+    const table = page.locator('#table2');
     // valida que el elemento tabla existe en el DOM
     await expect(table).toBeVisible();
-    
-    // obtenemos el primer apellido antes de ordenar
-    const firstLastNameBefore = await page.locator('#table1 tbody tr:first-child td:nth-child(1)').textContent();
-    
-    // hacemos click en el header para ordenar por apellido
-    await page.locator('#table1 thead th:nth-child(1)').click();
-    
-    // obtenemos el primer apellido después de ordenar
-    const firstLastNameAfter = await page.locator('#table1 tbody tr:first-child td:nth-child(1)').textContent();
-    
-    // verificamos que el orden cambió
+
+    // obtenemos todos los apellidos antes de ordenar
+    const lastNamesBefore = await page.locator('#table2 tbody tr td:nth-child(1)').allTextContents();
+
+    // hacemos click en el header para ordenar por apellido (cambia el orden)
+    await page.locator('#table2 thead th:nth-child(1) span').click();
+
+    // esperamos un momento para que se actualice el DOM
+    await page.waitForTimeout(500);
+
+    // obtenemos todos los apellidos después de ordenar
+    const lastNamesAfter = await page.locator('#table2 tbody tr td:nth-child(1)').allTextContents();
+
+    // verificamos que el orden cambió comparando los arrays completos
     // compara que los valores antes y después del ordenamiento sean diferentes
-    expect(firstLastNameBefore).not.toBe(firstLastNameAfter);
-    
+    expect(lastNamesBefore).not.toEqual(lastNamesAfter);
+
     // validamos que hay exactamente 4 filas en la tabla
-    const rows = page.locator('#table1 tbody tr');
+    const rows = page.locator('#table2 tbody tr');
     // cuenta el número total de filas en el tbody
     await expect(rows).toHaveCount(4);
   });
@@ -75,10 +78,10 @@ test.describe('ejercicio 4 - interacciones avanzadas con tablas y dropdowns', ()
 
   test('manejar múltiples ventanas y validar navegación', async ({ page, context }) => {
     await page.getByRole('link', { name: 'Multiple Windows' }).click();
-    
+
     // verificamos el título de la página actual
     // valida que el h3 contenga el texto esperado
-    await expect(page.locator('h3')).toContainText('Opening a New Window');
+    await expect(page.locator('h3')).toContainText('Opening a new window');
     
     // esperamos que se abra una nueva ventana al hacer click
     const [newPage] = await Promise.all([
